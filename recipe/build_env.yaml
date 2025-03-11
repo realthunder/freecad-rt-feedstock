@@ -3,7 +3,7 @@ channels:
   - conda-forge
   - freecad
   - default
-
+channel_priority: strict
 dependencies:
   - anaconda-client
   - urllib3 <2.0.0

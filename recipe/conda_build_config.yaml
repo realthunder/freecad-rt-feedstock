@@ -1,5 +1,8 @@
 MACOSX_DEPLOYMENT_TARGET:  # [osx]
 - '11.0'                   # [osx and arm64]
 - '10.13'                  # [osx and x86_64]
+channel_priority: strict
+channel_sources:
+  - realthunder,conda-forge,defaults
 channel_targets:
   - realthunder main
