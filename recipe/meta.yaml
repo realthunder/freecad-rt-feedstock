@@ -5,10 +5,12 @@ package:
   version: {{ environ['GIT_DESCRIBE_TAG'] }}
 
 source:
-  path : ../../repo
-
+  git_url : https://github.com/realthunder/FreeCAD.git
+  git_rev: 20250311tip
+  git_recursive: false
+  
 build:
-  number: 4
+  number: 5
 
 requirements:
   run_constrained:
@@ -16,7 +18,7 @@ requirements:
     - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.13") }}  # [osx and x86_64]
   build:
     - {{ compiler("cxx") }}
-    # - {{ stdlib("c") }}
+    - {{ stdlib("c") }}
     - {{ cdt('mesa-libgl-devel') }}      # [linux]
     - {{ cdt('mesa-dri-drivers') }}      # [linux]
     - {{ cdt('mesa-libegl-devel') }}     # [linux]
