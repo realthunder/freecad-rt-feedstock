@@ -61,7 +61,7 @@ requirements:
     - hdf5 
     - freetype
     - libspnav  # [linux]
-    - pcl
+    - pcl 1.14
     - six
     - ply
     - fmt ==9.1.0

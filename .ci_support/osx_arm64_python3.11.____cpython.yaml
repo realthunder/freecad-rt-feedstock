@@ -7,7 +7,7 @@ c_stdlib:
 c_stdlib_version:
 - '11.0'
 channel_sources:
-- conda-forge
+- realthunder,conda-forge,defaults
 channel_targets:
 - realthunder main
 cxx_compiler:
