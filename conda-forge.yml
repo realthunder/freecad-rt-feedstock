@@ -17,3 +17,4 @@ provider:
   osx_64: github_actions
   osx_arm64: github_actions
 test: native_and_emulated
+channel_priority: strict

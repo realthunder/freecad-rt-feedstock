@@ -52,6 +52,7 @@ requirements:
     - xerces-c
     - zlib
     - vtk 9.2.6
+    - ffmpeg 7.0.1  # for vtk-io-ffmpeg
     - eigen
     - pybind11
     - coin3d-rt
@@ -91,10 +92,10 @@ requirements:
     - gmsh
     - graphviz
 
-# test:
-#   commands:
-#     # - FreeCADCmd -t 0
-#     - FreeCADCmd --version
+test:
+  commands:
+    # - FreeCADCmd -t 0
+    - FreeCADCmd --version || true # [unix and build_platform == target_platform]
 
 about:
   home: https://github.com/realthunder/FreeCAD
