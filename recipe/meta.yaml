@@ -1,6 +1,6 @@
 {% set name = "freecad-rt" %}
 {% set tag = "20250311tip" %}
-{% set sha256 = "2958a9a422972a0f0b683b8e2deaa21279273c30d5f406c3a65d7f54a95ad6f0" %}
+{% set sha256 = "7dc8c1373cc6066c43645bc6c34097acfc801ad52d8d2160c7737e99e275ae0c" %}
 
 package:
   name: {{ name }}
