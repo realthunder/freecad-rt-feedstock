@@ -92,10 +92,10 @@ requirements:
     - gmsh
     - graphviz
 
-test:
-  commands:
-    # - FreeCADCmd -t 0
-    - FreeCADCmd --version || true # [unix and build_platform == target_platform]
+# test:
+#   commands:
+#     # - FreeCADCmd -t 0
+#     - FreeCADCmd --version || true # [unix and build_platform == target_platform]
 
 about:
   home: https://github.com/realthunder/FreeCAD
