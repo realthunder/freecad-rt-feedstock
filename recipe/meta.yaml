@@ -1,6 +1,6 @@
 {% set name = "freecad-rt" %}
 {% set tag = "20250311tip" %}
-{% set sha256 = "7dc8c1373cc6066c43645bc6c34097acfc801ad52d8d2160c7737e99e275ae0c" %}
+{% set sha256 = "779364f1564ad139bc88aebdf231f66a1612facaa282e5eabc76ddfac41cc9c3" %}
 
 package:
   name: {{ name }}
@@ -9,9 +9,6 @@ package:
 source:
   url: https://github.com/realthunder/FreeCAD/archive/refs/tags/{{ tag }}.tar.gz
   sha256: {{ sha256 }}
-  # git_url : https://github.com/realthunder/FreeCAD.git
-  # git_rev: 20250311tip
-  # git_recursive: false
   
 build:
   number: 5
