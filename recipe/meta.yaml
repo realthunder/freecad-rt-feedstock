@@ -1,6 +1,6 @@
 {% set name = "freecad-rt" %}
-{% set tag = "20250311tip" %}
-{% set sha256 = "779364f1564ad139bc88aebdf231f66a1612facaa282e5eabc76ddfac41cc9c3" %}
+{% set tag = "20251011tip" %}
+{% set sha256 = "7c37fde5239a205b487623f024a6e5d96425de549f7fb6e606c0fd8240d3f674" %}
 
 package:
   name: {{ name }}
@@ -11,7 +11,7 @@ source:
   sha256: {{ sha256 }}
   
 build:
-  number: 5
+  number: 6
 
 requirements:
   run_constrained:
