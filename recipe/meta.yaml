@@ -33,6 +33,7 @@ requirements:
     - {{ cdt('libxau') }}                # [linux]
     - {{ cdt('libxi-devel') }}           # [linux]
     - cmake
+    - swig
     - ninja
     - git
     - sed  # [unix]
