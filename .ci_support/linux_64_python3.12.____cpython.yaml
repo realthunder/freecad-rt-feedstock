@@ -5,21 +5,19 @@ c_stdlib_version:
 cdt_name:
 - conda
 channel_sources:
-- realthunder,conda-forge,defaults
+- realthunder,freecad/label/dev,conda-forge,defaults
 channel_targets:
 - realthunder main
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '13'
+- '14'
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:cos7
 freetype:
 - '2'
 hdf5:
 - 1.14.3
-libboost_devel:
-- '1.84'
 pcl:
 - 1.15.0
 pin_run_as_build:

@@ -1,7 +1,7 @@
 c_stdlib:
 - vs
 channel_sources:
-- realthunder,conda-forge,defaults
+- realthunder,freecad/label/dev,conda-forge,defaults
 channel_targets:
 - realthunder main
 cxx_compiler:
@@ -10,8 +10,6 @@ freetype:
 - '2'
 hdf5:
 - 1.14.3
-libboost_devel:
-- '1.84'
 pcl:
 - 1.15.0
 pin_run_as_build:

@@ -42,7 +42,7 @@ requirements:
     - qt-main                                # [build_platform != target_platform]
     - pybind11                               # [build_platform != target_platform]
   host:
-    - libboost-devel
+    - libboost-devel 1.84
     - python
     - qt-main
     - qt-webengine

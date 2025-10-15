@@ -36,7 +36,7 @@ jobs:
           #   os: ubuntu
           #   runs_on: ['ubuntu-latest']
           #   DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:cos7
-          # - CONFIG: linux_64_python3.9.____cpython
+          # - CONFIG: linux_64_python3.13.____cp313
           #   UPLOAD_PACKAGES: True
           #   os: ubuntu
           #   runs_on: ['ubuntu-latest']
@@ -56,7 +56,7 @@ jobs:
           #   os: ubuntu
           #   runs_on: ['ubuntu-latest']
           #   DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:cos7
-          # - CONFIG: linux_aarch64_python3.9.____cpython
+          # - CONFIG: linux_aarch64_python3.13.____cp313
           #   UPLOAD_PACKAGES: True
           #   os: ubuntu
           #   runs_on: ['ubuntu-latest']
@@ -73,7 +73,7 @@ jobs:
           #   UPLOAD_PACKAGES: True
           #   os: macos
           #   runs_on: ['macos-13']
-          # - CONFIG: osx_64_python3.9.____cpython
+          # - CONFIG: osx_64_python3.13.____cp313
           #   UPLOAD_PACKAGES: True
           #   os: macos
           #   runs_on: ['macos-13']
@@ -89,7 +89,7 @@ jobs:
           #   UPLOAD_PACKAGES: True
           #   os: macos
           #   runs_on: ['macos-13']
-          # - CONFIG: osx_arm64_python3.9.____cpython
+          # - CONFIG: osx_arm64_python3.13.____cp313
           #   UPLOAD_PACKAGES: True
           #   os: macos
           #   runs_on: ['macos-13']
@@ -105,16 +105,17 @@ jobs:
           #   UPLOAD_PACKAGES: True
           #   os: windows
           #   runs_on: ['windows-latest']
-          # - CONFIG: win_64_python3.9.____cpython
+          # - CONFIG: win_64_python3.13.____cp313
           #   UPLOAD_PACKAGES: True
           #   os: windows
           #   runs_on: ['windows-latest']
     steps:
 
     - name: Checkout code
-      uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
+      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
     - name: Build on Linux
+      id: build-linux
       if: matrix.os == 'ubuntu'
       env:
         CONFIG: ${{ matrix.CONFIG }}
@@ -123,12 +124,12 @@ jobs:
         CI: github_actions
         CONDA_FORGE_DOCKER_RUN_ARGS: "${{ matrix.CONDA_FORGE_DOCKER_RUN_ARGS }}"
         BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
-        FEEDSTOCK_TOKEN: ${{ secrets.FEEDSTOCK_TOKEN }}
-        STAGING_BINSTAR_TOKEN: ${{ secrets.STAGING_BINSTAR_TOKEN }}
       shell: bash
       run: |
-        echo "::group::Configure binfmt_misc"
-        docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
+        if [[ "$(uname -m)" == "x86_64" ]]; then
+          echo "::group::Configure binfmt_misc"
+          docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
+        fi
         export flow_run_id="github_$GITHUB_RUN_ID"
         export remote_url="https://github.com/$GITHUB_REPOSITORY"
         export sha="$GITHUB_SHA"
@@ -143,14 +144,13 @@ jobs:
         ./.scripts/run_docker_build.sh
 
     - name: Build on macOS
+      id: build-macos
       if: matrix.os == 'macos'
       env:
         CONFIG: ${{ matrix.CONFIG }}
         UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
         CI: github_actions
         BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
-        FEEDSTOCK_TOKEN: ${{ secrets.FEEDSTOCK_TOKEN }}
-        STAGING_BINSTAR_TOKEN: ${{ secrets.STAGING_BINSTAR_TOKEN }}
       shell: bash
       run: |
         export flow_run_id="github_$GITHUB_RUN_ID"
@@ -166,6 +166,8 @@ jobs:
         ./.scripts/run_osx_build.sh
 
     - name: Build on windows
+      id: build-windows
+      if: matrix.os == 'windows'
       shell: cmd
       run: |
         set "flow_run_id=github_%GITHUB_RUN_ID%"
@@ -173,12 +175,12 @@ jobs:
         set "sha=%GITHUB_SHA%"
         call ".scripts\run_win_build.bat"
       env:
+        # default value; make it explicit, as it needs to match with artefact
+        # generation below. Not configurable for now, can be revisited later
+        CONDA_BLD_DIR: C:\bld
         MINIFORGE_HOME: D:\Miniforge
         PYTHONUNBUFFERED: 1
         CONFIG: ${{ matrix.CONFIG }}
         CI: github_actions
         UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
         BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
-        FEEDSTOCK_TOKEN: ${{ secrets.FEEDSTOCK_TOKEN }}
-        STAGING_BINSTAR_TOKEN: ${{ secrets.STAGING_BINSTAR_TOKEN }}
-      if: matrix.os == 'windows'
