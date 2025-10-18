@@ -11,7 +11,7 @@ source:
   sha256: {{ sha256 }}
   
 build:
-  number: 6
+  number: 8
 
 requirements:
   run_constrained:
@@ -73,22 +73,16 @@ requirements:
     - occt 7.7.2
     - pyside2
     - vtk 9.2.6
-    - xerces-c
-    - zlib
-    - hdf5
     - coin3d-rt
     - pivy-rt
-    - freetype
     - numpy
     - six
     - future
     - pyyaml
     - libspnav  # [linux]
     - {{ pin_compatible('smesh', max_pin='x.x.x') }}
-    - pcl
     - ply
     - gmsh
-    - graphviz
 
 # test:
 #   commands:
