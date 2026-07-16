@@ -2,6 +2,10 @@
 {% set tag = "20251015tip" %}
 {% set sha256 = "2e50688b98bf10f9196b5f7745428efa8609bc5c5c32c0c4714b7324ec101190" %}
 
+{% if qt is undefined %}
+{% set qt = "6" %}
+{% endif %}
+
 package:
   name: {{ name }}
   version: {{ tag }}
@@ -9,9 +13,17 @@ package:
 source:
   url: https://github.com/realthunder/FreeCAD/archive/refs/tags/{{ tag }}.tar.gz
   sha256: {{ sha256 }}
-  
+
 build:
-  number: 8
+  number: 9
+  string: py{{ CONDA_PY }}qt{{ qt }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
+  script_env:
+  {% if qt|int >= 6 %}
+    - USE_QT6=1
+  {% else %}
+    - USE_QT6=0
+  skip: true  # [py>311]
+  {% endif %}
 
 requirements:
   run_constrained:
@@ -39,13 +51,22 @@ requirements:
     - sed  # [unix]
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+  {% if qt|int >= 6 %}
+    - qt6-main                               # [build_platform != target_platform]
+  {% else %}
     - qt-main                                # [build_platform != target_platform]
+  {% endif %}
     - pybind11                               # [build_platform != target_platform]
   host:
     - libboost-devel 1.84
     - python
+  {% if qt|int >= 6 %}
+    - qt6-main
+    - qt6-webengine
+  {% else %}
     - qt-main
     - qt-webengine
+  {% endif %}
     - occt 7.7.2
     - xerces-c
     - zlib
@@ -55,7 +76,11 @@ requirements:
     - pybind11
     - coin3d-rt
     - pivy-rt
+  {% if qt|int >= 6 %}
+    - pyside6
+  {% else %}
     - pyside2
+  {% endif %}
     - smesh
     - hdf5 
     - freetype
@@ -71,7 +96,11 @@ requirements:
   run:
     - python
     - occt 7.7.2
+  {% if qt|int >= 6 %}
+    - pyside6
+  {% else %}
     - pyside2
+  {% endif %}
     - vtk 9.2.6
     - coin3d-rt
     - pivy-rt

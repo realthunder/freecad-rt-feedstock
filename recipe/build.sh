@@ -11,12 +11,20 @@ if [[ ${HOST} =~ .*linux.* ]]; then
     #     LIBPTHREAD=$(find ${PREFIX} -name "libpthread.so") sed -i 's#/home/conda/feedstock_root/build_artifacts/vtk_.*_build_env/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib.*;##g' ${PREFIX}/lib/cmake/vtk-*/Modules/vtkhdf5.cmake
     # fi
 
-    # temporary workaround for qt-cmake:
-    sed -i 's|_qt5gui_find_extra_libs(EGL.*)|_qt5gui_find_extra_libs(EGL "EGL" "" "")|g' $PREFIX/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake
-    sed -i 's|_qt5gui_find_extra_libs(OPENGL.*)|_qt5gui_find_extra_libs(OPENGL "GL" "" "")|g' $PREFIX/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake
+    if [[ "${USE_QT6}" != "1" ]]; then
+        # temporary workaround for qt-cmake:
+        sed -i 's|_qt5gui_find_extra_libs(EGL.*)|_qt5gui_find_extra_libs(EGL "EGL" "" "")|g' $PREFIX/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake
+        sed -i 's|_qt5gui_find_extra_libs(OPENGL.*)|_qt5gui_find_extra_libs(OPENGL "GL" "" "")|g' $PREFIX/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake
+    fi
     if test ${CONDA_BUILD_CROSS_COMPILATION}; then
         CMAKE_PLATFORM_FLAGS+=(-DCMAKE_TOOLCHAIN_FILE="${RECIPE_DIR}/cross-linux.cmake")
     fi
+fi
+
+if [[ "${USE_QT6}" == "1" ]]; then
+    CMAKE_PLATFORM_FLAGS+=(-DFREECAD_QT_VERSION=6)
+else
+    CMAKE_PLATFORM_FLAGS+=(-DFREECAD_QT_VERSION=5)
 fi
 
 if [[ ${HOST} =~ .*darwin.* ]]; then
@@ -46,7 +54,6 @@ cmake -G "$cmake_generator" \
       -D CMAKE_PREFIX_PATH:FILEPATH=$PREFIX \
       -D CMAKE_LIBRARY_PATH:FILEPATH=$PREFIX/lib \
       -D CMAKE_INCLUDE_PATH:FILEPATH=$PREFIX/include \
-      -D BUILD_QT5:BOOL=ON \
       -D FREECAD_USE_OCC_VARIANT="Official Version" \
       -D OCC_INCLUDE_DIR:FILEPATH=$PREFIX/include \
       -D USE_BOOST_PYTHON:BOOL=OFF \
