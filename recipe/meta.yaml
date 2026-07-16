@@ -1,6 +1,6 @@
 {% set name = "freecad-rt" %}
-{% set tag = "20251015tip" %}
-{% set sha256 = "2e50688b98bf10f9196b5f7745428efa8609bc5c5c32c0c4714b7324ec101190" %}
+{% set branch = "LinkVibe" %}
+{% set version = "20251015tip" %}
 
 {% if qt is undefined %}
 {% set qt = "6" %}
@@ -8,14 +8,15 @@
 
 package:
   name: {{ name }}
-  version: {{ tag }}
+  version: {{ version }}
 
 source:
-  url: https://github.com/realthunder/FreeCAD/archive/refs/tags/{{ tag }}.tar.gz
-  sha256: {{ sha256 }}
+  git_url: https://github.com/realthunder/FreeCAD.git
+  git_rev: {{ branch }}
+  git_depth: 1
 
 build:
-  number: 10
+  number: 11
   string: py{{ CONDA_PY }}qt{{ qt }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
   script_env:
   {% if qt|int >= 6 %}
