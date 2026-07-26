@@ -64,35 +64,35 @@ jobs:
           # - CONFIG: osx_64_python3.10.____cpython
           #   UPLOAD_PACKAGES: True
           #   os: macos
-          #   runs_on: ['macos-13']
+          #   runs_on: ['macos-15-intel']
           - CONFIG: osx_64_python3.11.____cpython
             UPLOAD_PACKAGES: True
             os: macos
-            runs_on: ['macos-13']
+            runs_on: ['macos-15-intel']
           # - CONFIG: osx_64_python3.12.____cpython
           #   UPLOAD_PACKAGES: True
           #   os: macos
-          #   runs_on: ['macos-13']
+          #   runs_on: ['macos-15-intel']
           # - CONFIG: osx_64_python3.13.____cp313
           #   UPLOAD_PACKAGES: True
           #   os: macos
-          #   runs_on: ['macos-13']
+          #   runs_on: ['macos-15-intel']
           # - CONFIG: osx_arm64_python3.10.____cpython
           #   UPLOAD_PACKAGES: True
           #   os: macos
-          #   runs_on: ['macos-13']
+          #   runs_on: ['macos-15-intel']
           - CONFIG: osx_arm64_python3.11.____cpython
             UPLOAD_PACKAGES: True
             os: macos
-            runs_on: ['macos-13']
+            runs_on: ['macos-15-intel']
           # - CONFIG: osx_arm64_python3.12.____cpython
           #   UPLOAD_PACKAGES: True
           #   os: macos
-          #   runs_on: ['macos-13']
+          #   runs_on: ['macos-15-intel']
           # - CONFIG: osx_arm64_python3.13.____cp313
           #   UPLOAD_PACKAGES: True
           #   os: macos
-          #   runs_on: ['macos-13']
+          #   runs_on: ['macos-15-intel']
           # - CONFIG: win_64_python3.10.____cpython
           #   UPLOAD_PACKAGES: True
           #   os: windows
