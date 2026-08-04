@@ -48,7 +48,6 @@ if [[ ${HOST} =~ .*darwin.* ]]; then
 fi
 
 cmake -G "$cmake_generator" \
-      -D BUID_WITH_CONDA:BOOL=ON \
       -D CMAKE_BUILD_TYPE=Release \
       -D CMAKE_INSTALL_PREFIX:FILEPATH=$PREFIX \
       -D CMAKE_PREFIX_PATH:FILEPATH=$PREFIX \
