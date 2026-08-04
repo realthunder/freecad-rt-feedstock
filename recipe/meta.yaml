@@ -63,10 +63,8 @@ requirements:
     - python
   {% if qt|int >= 6 %}
     - qt6-main
-    - qt6-webengine
   {% else %}
     - qt-main
-    - qt-webengine
   {% endif %}
     - occt 7.7.2
     - xerces-c
