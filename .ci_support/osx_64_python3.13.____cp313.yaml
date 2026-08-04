@@ -7,7 +7,7 @@ c_stdlib:
 c_stdlib_version:
 - '10.13'
 channel_sources:
-- realthunder,freecad/label/dev,conda-forge,defaults
+- realthunder,freecad/label/dev,conda-forge
 channel_targets:
 - realthunder main
 cxx_compiler:

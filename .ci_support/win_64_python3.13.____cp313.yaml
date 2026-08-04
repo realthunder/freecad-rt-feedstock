@@ -1,7 +1,7 @@
 c_stdlib:
 - vs
 channel_sources:
-- realthunder,freecad/label/dev,conda-forge,defaults
+- realthunder,freecad/label/dev,conda-forge
 channel_targets:
 - realthunder main
 cxx_compiler:

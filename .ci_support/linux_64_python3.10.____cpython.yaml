@@ -5,7 +5,7 @@ c_stdlib_version:
 cdt_name:
 - conda
 channel_sources:
-- realthunder,freecad/label/dev,conda-forge,defaults
+- realthunder,freecad/label/dev,conda-forge
 channel_targets:
 - realthunder main
 cxx_compiler:
