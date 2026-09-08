@@ -59,14 +59,14 @@ requirements:
   {% endif %}
     - pybind11                               # [build_platform != target_platform]
   host:
-    - libboost-devel 1.84
+    - libboost-devel 1.90
     - python
   {% if qt|int >= 6 %}
     - qt6-main
   {% else %}
     - qt-main
   {% endif %}
-    - occt 7.7.2
+    - occt 8.0.1
     - xerces-c
     - zlib
     - vtk 9.2.6
@@ -84,17 +84,17 @@ requirements:
     - hdf5 
     - freetype
     - libspnav  # [linux]
-    - pcl 1.14
+    - pcl 1.15
     - six
     - ply
-    - fmt ==9.1.0
+    - fmt ==12.1.0
     - matplotlib-base
     - xorg-xproto   # [linux]
     - yaml-cpp
     - tbb-devel  # [win]
   run:
     - python
-    - occt 7.7.2
+    - occt 8.0.1
   {% if qt|int >= 6 %}
     - pyside6
     # macOS links Qt's RHI headers (QRhi, QRhiTexture, the native-handle

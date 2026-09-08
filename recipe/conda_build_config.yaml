@@ -8,3 +8,13 @@ cxx_compiler:         # [win]
     - vs2022          # [win]
 MACOSX_SDK_VERSION:   # [osx]
     - '11.0'          # [osx]
+
+# The macOS package links Qt's RHI headers (QRhi, QRhiTexture, the
+# native-handle structs) for the renderer's device-adoption path. Those are
+# private API with no source or binary compatibility guarantee across Qt
+# releases, so the Qt we build against has to be a known fixed version rather
+# than whatever the solver picks on the day. Pairs with the
+# pin_compatible('qt6-main') run requirement in meta.yaml: this fixes what the
+# package is BUILT against, that fixes what it is allowed to RUN against.
+qt6_main:             # [osx]
+    - '6.11.1'        # [osx]
