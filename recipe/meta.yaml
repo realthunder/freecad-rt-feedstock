@@ -46,7 +46,17 @@ requirements:
     - {{ cdt('libxau') }}                # [linux]
     - {{ cdt('libxi-devel') }}           # [linux]
     - cmake
-    - swig
+    # SWIG generation must match the one pivy-rt was built with, and version
+    # is NOT a proxy for it. SWIG shares its type registry through a module
+    # named swig_runtime_data<N> (swigpyrun.h); pivy registers Coin's types
+    # into the module ITS swig named, FreeCAD looks them up in the module
+    # OURS named, and two generations never meet. Nothing fails at build or
+    # import time -- only a pointer crossing the boundary does, as
+    # "RuntimeError: No SWIG wrapped library loaded", which kills every
+    # createSWIGPointerObj site at once and so all Coin scripting. 4.2.x
+    # emits generation 4, 4.5.x emits 5. Keep this in step with the swig pin
+    # in pivy-feedstock; do not widen it as housekeeping.
+    - swig >=4.5,<4.6
     - ninja
     - git
     - sed  # [unix]
