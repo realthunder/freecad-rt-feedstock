@@ -69,7 +69,7 @@ requirements:
     - occt 8.0.1
     - xerces-c
     - zlib
-    - vtk 9.2.6
+    - vtk 9.6.2
     - ffmpeg 7.0.1  # for vtk-io-ffmpeg
     - eigen
     - pybind11
@@ -81,7 +81,14 @@ requirements:
     - pyside2
   {% endif %}
     - smesh
-    - hdf5 
+    - hdf5
+    - libmed
+    - libxml2-devel
+    # Cycles (BUILD_CYCLES=ON). openexr and tbb are already pulled in
+    # above via occt; these three are what the path tracer adds.
+    - openimageio
+    - embree
+    - openimagedenoise
     - freetype
     - libspnav  # [linux]
     - pcl 1.15
@@ -91,7 +98,7 @@ requirements:
     - matplotlib-base
     - xorg-xproto   # [linux]
     - yaml-cpp
-    - tbb-devel  # [win]
+    - tbb-devel
   run:
     - python
     - occt 8.0.1
@@ -111,7 +118,7 @@ requirements:
   {% else %}
     - pyside2
   {% endif %}
-    - vtk 9.2.6
+    - vtk 9.6.2
     - coin3d-rt
     - pivy-rt
     - numpy
@@ -122,6 +129,7 @@ requirements:
     - libspnav  # [linux]
     - {{ pin_compatible('smesh', max_pin='x.x.x') }}
     - ply
+    - lark
     - gmsh
 
 # test:

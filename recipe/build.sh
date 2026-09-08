@@ -74,6 +74,12 @@ cmake -G "$cmake_generator" \
       -D FREECAD_USE_PCH:BOOL=OFF \
       -D BUILD_DYNAMIC_LINK_PYTHON:BOOL=OFF \
       -D BUILD_ASSEMBLY:BOOL=ON \
+      -D BUILD_FEM:BOOL=ON \
+      -D BUILD_WEB:BOOL=OFF \
+      -D BUILD_ENABLE_CXX_STD:STRING=C++20 \
+      -D BUILD_BGFX:BOOL=ON \
+      -D BUILD_CYCLES:BOOL=ON \
+      -D CMAKE_POLICY_VERSION_MINIMUM=3.5 \
       ${CMAKE_PLATFORM_FLAGS[@]} \
       ../..
 
