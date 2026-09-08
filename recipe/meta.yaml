@@ -18,12 +18,26 @@ source:
 build:
   number: 11
   string: py{{ CONDA_PY }}qt{{ qt }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
+  # Only 3.13 for this dev cycle, and this is what controls the rendered
+  # matrix -- a python list in conda_build_config.yaml does NOT work,
+  # because conda-smithy takes python from the global pinning and ignores
+  # the recipe's. Keep it in step with pivy-feedstock, or one of the two
+  # builds a python the other cannot resolve.
+  #
+  # A selector here is evaluated on the RAW text, before jinja removes a
+  # branch. That is not a detail: the "skip: true # [py>311]" that used to
+  # sit in the {% raw %}{% else %}{% endraw %} arm below applied to the qt6
+  # build too, even though that arm is never emitted at qt 6, and had been
+  # silently capping every build at python 3.11. It is why the checked-in
+  # .ci_support claimed 3.10-3.13 while a fresh render produced 3.11 alone,
+  # and why py311 is the only freecad-rt ever published. Removed with this
+  # change; do not reintroduce a selector inside a jinja branch.
+  skip: true  # [py != 313]
   script_env:
   {% if qt|int >= 6 %}
     - USE_QT6=1
   {% else %}
     - USE_QT6=0
-  skip: true  # [py>311]
   {% endif %}
 
 requirements:

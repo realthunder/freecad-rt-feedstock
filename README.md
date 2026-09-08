@@ -16,7 +16,14 @@ Current build status
 ====================
 
 
-<table>
+<table><tr>
+    <td>GitHub Actions</td>
+    <td>
+      <a href="https://github.com/realthunder/freecad-rt-feedstock/actions/workflows/conda-build.yml">
+        <img src="https://github.com/realthunder/freecad-rt-feedstock/actions/workflows/conda-build.yml/badge.svg?event=push&branch=main">
+      </a>
+    </td>
+  </tr>
 </table>
 
 Current release info
@@ -36,31 +43,73 @@ conda config --add channels realthunder
 conda config --set channel_priority strict
 ```
 
-Once the `realthunder` channel has been enabled, `freecad-rt` can be installed with `conda`:
+How to use
+----------
+
+<details>
+<summary>With conda</summary>
 
 ```
 conda install freecad-rt
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
 mamba install freecad-rt
 ```
 
-It is possible to list all of the versions of `freecad-rt` available on your platform with `conda`:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+# for adding to your local project
+pixi add freecad-rt
+# for installing globally
+pixi global install freecad-rt
+```
+
+</details>
+
+Search package versions
+-----------------------
+
+It is possible to list all of the versions of `freecad-rt` available on your platform:
+
+<details>
+<summary>With conda</summary>
 
 ```
 conda search freecad-rt --channel realthunder
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
 mamba search freecad-rt --channel realthunder
 ```
 
-Alternatively, `mamba repoquery` may provide more information:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+pixi search freecad-rt --channel realthunder
+```
+
+</details>
+
+<details>
+<summary>With mamba repoquery, which may provide more information</summary>
 
 ```
 # Search all versions available on your platform:
@@ -72,6 +121,8 @@ mamba repoquery whoneeds freecad-rt --channel realthunder
 # List dependencies of `freecad-rt`:
 mamba repoquery depends freecad-rt --channel realthunder
 ```
+
+</details>
 
 
 
