@@ -97,6 +97,17 @@ requirements:
     - occt 7.7.2
   {% if qt|int >= 6 %}
     - pyside6
+    # macOS links Qt's RHI headers (QRhi, QRhiTexture, the native-handle
+    # structs) for the renderer's device-adoption path. Those are private API:
+    # qrhi.h states it may make code source AND binary incompatible with future
+    # Qt releases. qt6-main's own run-export is ">=<built version>,<7.0a0",
+    # which is correct for public Qt and far too loose here -- it would let a
+    # package built against 6.11.1 run against 6.12, where a moved struct
+    # layout fails silently under already-compiled code rather than as a
+    # missing symbol. Pin to the patch release this package was actually built
+    # against. The bundle image is safe without this because it carries its own
+    # Qt; this is for the package installed into someone else's environment.
+    - {{ pin_compatible('qt6-main', max_pin='x.x.x') }}  # [osx]
   {% else %}
     - pyside2
   {% endif %}
